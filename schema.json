@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "metadata": {
+            "type": "object"
+        },
+        "spec": {
+            "type": "object",
+            "properties": {
+                "containers": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "image": {
+                                "type": "string",
+                                "pattern": "^quay.io/reactiveops/polaris:[0-9]\\.[0-9]"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

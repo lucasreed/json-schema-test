@@ -1,0 +1,200 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "creationTimestamp": "2019-08-26T13:15:27Z",
+        "generateName": "polaris-dashboard-5f6f87f5b9-",
+        "labels": {
+            "app": "polaris",
+            "app.kubernetes.io/instance": "polaris",
+            "app.kubernetes.io/name": "polaris",
+            "component": "dashboard",
+            "pod-template-hash": "5f6f87f5b9"
+        },
+        "name": "polaris-dashboard-5f6f87f5b9-rbzlq",
+        "namespace": "polaris",
+        "ownerReferences": [
+            {
+                "apiVersion": "apps/v1",
+                "blockOwnerDeletion": true,
+                "controller": true,
+                "kind": "ReplicaSet",
+                "name": "polaris-dashboard-5f6f87f5b9",
+                "uid": "926fcec9-c803-11e9-b0d9-02691d03016e"
+            }
+        ],
+        "resourceVersion": "4543619",
+        "selfLink": "/api/v1/namespaces/polaris/pods/polaris-dashboard-5f6f87f5b9-rbzlq",
+        "uid": "9275fed9-c803-11e9-b0d9-02691d03016e"
+    },
+    "spec": {
+        "containers": [
+            {
+                "command": [
+                    "polaris",
+                    "--dashboard",
+                    "--config",
+                    "/opt/app/config.yaml"
+                ],
+                "image": "quay.io/reactiveops/polaris:0",
+                "imagePullPolicy": "Always",
+                "livenessProbe": {
+                    "failureThreshold": 3,
+                    "httpGet": {
+                        "path": "/health",
+                        "port": 8080,
+                        "scheme": "HTTP"
+                    },
+                    "initialDelaySeconds": 5,
+                    "periodSeconds": 20,
+                    "successThreshold": 1,
+                    "timeoutSeconds": 1
+                },
+                "name": "dashboard",
+                "ports": [
+                    {
+                        "containerPort": 8080,
+                        "protocol": "TCP"
+                    }
+                ],
+                "readinessProbe": {
+                    "failureThreshold": 3,
+                    "httpGet": {
+                        "path": "/health",
+                        "port": 8080,
+                        "scheme": "HTTP"
+                    },
+                    "initialDelaySeconds": 5,
+                    "periodSeconds": 20,
+                    "successThreshold": 1,
+                    "timeoutSeconds": 1
+                },
+                "resources": {
+                    "limits": {
+                        "cpu": "100m",
+                        "memory": "128Mi"
+                    },
+                    "requests": {
+                        "cpu": "100m",
+                        "memory": "128Mi"
+                    }
+                },
+                "securityContext": {
+                    "allowPrivilegeEscalation": false,
+                    "capabilities": {
+                        "drop": [
+                            "ALL"
+                        ]
+                    },
+                    "privileged": false,
+                    "readOnlyRootFilesystem": true,
+                    "runAsNonRoot": true
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/opt/app/config.yaml",
+                        "name": "config",
+                        "readOnly": true,
+                        "subPath": "config.yaml"
+                    },
+                    {
+                        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                        "name": "polaris-dashboard-token-6flsb",
+                        "readOnly": true
+                    }
+                ]
+            }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "enableServiceLinks": true,
+        "nodeName": "ip-172-20-16-110.us-east-2.compute.internal",
+        "priority": 0,
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "polaris-dashboard",
+        "serviceAccountName": "polaris-dashboard",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/not-ready",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            },
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/unreachable",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            }
+        ],
+        "volumes": [
+            {
+                "configMap": {
+                    "defaultMode": 420,
+                    "name": "polaris"
+                },
+                "name": "config"
+            },
+            {
+                "name": "polaris-dashboard-token-6flsb",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "polaris-dashboard-token-6flsb"
+                }
+            }
+        ]
+    },
+    "status": {
+        "conditions": [
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-08-26T13:15:27Z",
+                "status": "True",
+                "type": "Initialized"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-08-26T13:15:38Z",
+                "status": "True",
+                "type": "Ready"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-08-26T13:15:38Z",
+                "status": "True",
+                "type": "ContainersReady"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2019-08-26T13:15:27Z",
+                "status": "True",
+                "type": "PodScheduled"
+            }
+        ],
+        "containerStatuses": [
+            {
+                "containerID": "docker://4168bf093890c3116988c4414be91cfbb2f5c095b6d1b7e5690d8347cfe67696",
+                "image": "quay.io/reactiveops/polaris:0.2",
+                "imageID": "docker-pullable://quay.io/reactiveops/polaris@sha256:1775aa7d8d206fc327f6d458de9bfb0b878c725914df3c63a01bc8af0784176e",
+                "lastState": {},
+                "name": "dashboard",
+                "ready": true,
+                "restartCount": 0,
+                "state": {
+                    "running": {
+                        "startedAt": "2019-08-26T13:15:29Z"
+                    }
+                }
+            }
+        ],
+        "hostIP": "172.20.16.110",
+        "phase": "Running",
+        "podIP": "100.96.8.16",
+        "qosClass": "Guaranteed",
+        "startTime": "2019-08-26T13:15:27Z"
+    }
+}
